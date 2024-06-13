@@ -31,41 +31,41 @@ class MethodChannelFlutterP2pConnection extends FlutterP2pConnectionPlatform {
   }
 
   @override
-  Future<bool?> discover() async {
-    final discovering = await methodChannel.invokeMethod<bool?>("discover");
+  Future<int?> discover() async {
+    final discovering = await methodChannel.invokeMethod<int?>("discover");
     return discovering;
   }
 
   @override
-  Future<bool?> stopDiscovery() async {
-    final stopped = await methodChannel.invokeMethod<bool?>("stopDiscovery");
+  Future<int?> stopDiscovery() async {
+    final stopped = await methodChannel.invokeMethod<int?>("stopDiscovery");
     return stopped;
   }
 
   @override
-  Future<bool?> connect(String address) async {
+  Future<int?> connect(String address) async {
     final arg = {
       "address": address,
     };
-    final connected = await methodChannel.invokeMethod<bool?>("connect", arg);
+    final connected = await methodChannel.invokeMethod<int?>("connect", arg);
     return connected;
   }
 
   @override
-  Future<bool?> disconnect() async {
-    final disconnected = await methodChannel.invokeMethod<bool?>("disconnect");
+  Future<int?> disconnect() async {
+    final disconnected = await methodChannel.invokeMethod<int?>("disconnect");
     return disconnected;
   }
 
   @override
-  Future<bool?> createGroup() async {
-    final created = await methodChannel.invokeMethod<bool?>("createGroup");
+  Future<int?> createGroup() async {
+    final created = await methodChannel.invokeMethod<int?>("createGroup");
     return created;
   }
 
   @override
-  Future<bool?> removeGroup() async {
-    final removed = await methodChannel.invokeMethod<bool?>("removeGroup");
+  Future<int?> removeGroup() async {
+    final removed = await methodChannel.invokeMethod<int?>("removeGroup");
     return removed;
   }
 

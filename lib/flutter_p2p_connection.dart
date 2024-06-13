@@ -54,17 +54,17 @@ class FlutterP2pConnection {
   Future<bool> initialize() async =>
     (await FlutterP2pConnectionPlatform.instance.initialize()) == true;
 
-  Future<bool> discover() async =>
-    (await FlutterP2pConnectionPlatform.instance.discover()) == true;
+  Future<int> discover() async =>
+    (await FlutterP2pConnectionPlatform.instance.discover()) ?? 0;
 
-  Future<bool> stopDiscovery() async =>
-    (await FlutterP2pConnectionPlatform.instance.stopDiscovery()) == true;
+  Future<int> stopDiscovery() async =>
+    (await FlutterP2pConnectionPlatform.instance.stopDiscovery()) ?? 0;
 
-  Future<bool> connect(String address) async =>
-    (await FlutterP2pConnectionPlatform.instance.connect(address)) == true;
+  Future<int> connect(String address) async =>
+    (await FlutterP2pConnectionPlatform.instance.connect(address)) ?? 0;
 
-  Future<bool?> disconnect() async =>
-      (await FlutterP2pConnectionPlatform.instance.disconnect()) == true;
+  Future<int> disconnect() async =>
+      (await FlutterP2pConnectionPlatform.instance.disconnect()) ?? 0;
 
   Future<List<DiscoveredPeers>> fetchPeers() async {
     String? peers =
@@ -120,7 +120,7 @@ class FlutterP2pConnection {
       Map<String, dynamic>? json = jsonDecode(peers);
       if (json != null) {
         List<Client> clients = [];
-        if ((json["clients"] as List).isNotEmpty) {
+        if ((json["clients"] as List?)?.isNotEmpty == true) {
           for (var i in json["clients"]) {
             Map<String, dynamic> client = (i as Map<String, dynamic>);
             clients.add(Client(
@@ -172,21 +172,20 @@ class FlutterP2pConnection {
   Future<bool> unregister() async =>
       (await FlutterP2pConnectionPlatform.instance.pause()) == true;
 
-  Future<bool> createGroup() async =>
-      (await FlutterP2pConnectionPlatform.instance.createGroup()) == true;
+  Future<int> createGroup() async =>
+      (await FlutterP2pConnectionPlatform.instance.createGroup()) ?? 0;
 
-  Future<bool> removeGroup() async  =>
-      (await FlutterP2pConnectionPlatform.instance.removeGroup()) == true;
+  Future<int> removeGroup() async  =>
+      (await FlutterP2pConnectionPlatform.instance.removeGroup()) ?? 0;
 
   Future<WifiP2PGroupInfo?> groupInfo() async {
     String? gi = await FlutterP2pConnectionPlatform.instance
-        .groupInfo()
-        .timeout(const Duration(seconds: 1), onTimeout: () => null);
+        .groupInfo();
     if (gi == null) return null;
     Map<String, dynamic>? json = jsonDecode(gi);
     if (json == null) return null;
     List<Client> clients = [];
-    if ((json["clients"] as List).isNotEmpty) {
+    if ((json["clients"] as List?)?.isNotEmpty == true) {
       for (var i in json["clients"]) {
         Map<String, dynamic> client = (i as Map<String, dynamic>);
         clients.add(Client(

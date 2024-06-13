@@ -36,27 +36,27 @@ abstract class FlutterP2pConnectionPlatform extends PlatformInterface {
     throw UnimplementedError('initialize() has not been implemented.');
   }
 
-  Future<bool?> discover() {
+  Future<int?> discover() {
     throw UnimplementedError('discover() has not been implemented.');
   }
 
-  Future<bool?> stopDiscovery() {
+  Future<int?> stopDiscovery() {
     throw UnimplementedError('stopDiscovery() has not been implemented.');
   }
 
-  Future<bool?> connect(String address) {
+  Future<int?> connect(String address) {
     throw UnimplementedError('connect() has not been implemented.');
   }
 
-  Future<bool?> disconnect() {
+  Future<int?> disconnect() {
     throw UnimplementedError('disconnect() has not been implemented.');
   }
 
-  Future<bool?> createGroup() {
+  Future<int?> createGroup() {
     throw UnimplementedError('createGroup() has not been implemented.');
   }
 
-  Future<bool?> removeGroup() {
+  Future<int?> removeGroup() {
     throw UnimplementedError('removeGroup() has not been implemented.');
   }
 
