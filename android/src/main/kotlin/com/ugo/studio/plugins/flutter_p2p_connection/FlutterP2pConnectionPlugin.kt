@@ -286,30 +286,30 @@ class FlutterP2pConnectionPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
         })
     }
 
-    fun deviceConsolidateList(group: WifiP2pGroup): List<Any> {
-        var list: MutableList<Any> = mutableListOf()
+    fun deviceConsolidateList(group: WifiP2pGroup): List<Client> {
+        var list: MutableList<Client> = mutableListOf()
         for (device: WifiP2pDevice in group.clientList) {
             list.add(deviceConsolidated(device))
         }
         return list
     }
 
-    fun deviceConsolidated(device: WifiP2pDevice): Any {
-        val dev = object {
+    fun deviceConsolidated(device: WifiP2pDevice): Client {
+        val dev = Client(
             // from https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pDevice
-            val deviceName: String = device.deviceName
-            val deviceAddress: String = device.deviceAddress
-            val primaryDeviceType: String? = device.primaryDeviceType
-            val secondaryDeviceType: String? = device.secondaryDeviceType
-            val status: Int = device.status
+            deviceName  = device.deviceName
+            ,deviceAddress  = device.deviceAddress
+            ,primaryDeviceType  = device.primaryDeviceType
+            ,secondaryDeviceType = device.secondaryDeviceType
+            ,status  = device.status
 
             // methods called on object before sending through channel
-            val isGroupOwner: Boolean = device.isGroupOwner()
-            val isServiceDiscoveryCapable: Boolean = device.isServiceDiscoveryCapable()
-            val wpsDisplaySupported: Boolean = device.wpsDisplaySupported()
-            val wpsKeypadSupported: Boolean = device.wpsKeypadSupported()
-            val wpsPbcSupported: Boolean = device.wpsPbcSupported()
-        }
+            ,isGroupOwner  = device.isGroupOwner()
+            ,isServiceDiscoveryCapable  = device.isServiceDiscoveryCapable()
+            ,wpsDisplaySupported  = device.wpsDisplaySupported()
+            ,wpsKeypadSupported  = device.wpsKeypadSupported()
+            ,wpsPbcSupported  = device.wpsPbcSupported()
+        )
         return dev
     }
 
